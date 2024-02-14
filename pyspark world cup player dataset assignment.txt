@@ -1,0 +1,31 @@
+2. For World cup players dataset:
+
+1. Reading Data from file
+2. Schema of Dataframe
+3. count of the number of Rows and Columns of Dataframe.
+4. Show the player name and coach name
+5. Show the records where Match ID must be equal to 1096 and calculate how many records/rows are there in the filtered output.
+6. Sort the data by match id
+7. Show the records of position C and event is G40.
+8. Show the unique records with respect to match id.
+
+1.df = spark.read.csv("WorldCupPlayers.csv", header = True)
+2. df.printSchema()
+
+3.df.count()
+a = len(df.columns)
+print("The number of Columns of Dataframe are:",a)
+
+4.df.select("Player Name","Coach Name").show()
+
+5.from pyspark.sql.functions import count
+df.filter(df.MatchID == 1096).show()
+no_rec = df.filter(df.MatchID == 1096).count()
+print("Number of records in filtered output:",no_rec)
+
+
+6.df.sort("MatchID").show()
+
+7.df.filter( (df.Position  == "C") & (df.Event  == "G40'") ).show()
+
+8.df.select("MatchID").distinct().show()
